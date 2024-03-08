@@ -1,0 +1,32 @@
+MODEL:
+  TYPE: swin
+  NUMBER: 1
+  DROP_PATH_RATE: 0.2
+  NUM_CLASS: 10
+  SWIN:
+    EMBED_DIM: 96
+    DEPTHS: [2, 2, 6, 2]
+    NUM_HEADS: [3, 6, 12, 24]
+    WINDOW_SIZE: 8
+
+DATA:
+  TYPE: 'coror_norm'
+  TRAIN_DATA_PATH: 'dataset/color_norm/*/*/*.jpg'
+  TEST_DATA_PATH: 'dataset/color_norm/*/*/*.jpg'
+  IMAGE_SIZE: 512
+  BATCH_SIZE: 16
+  OUTPUT_CHANNEL: 10
+  COLOR: 'color'
+  NUM_WORKERS: 1
+
+TRAIN:
+  EPOCHS: 50
+  LR: 2e-5
+  EARLY_STOP: 50
+  LR_STEP: 5
+  LOAD_MODEL_TYPE: 'best'
+
+TSNE:
+  PERPLEXITY_LIST: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+  LIM : 130
+

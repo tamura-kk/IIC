@@ -1,0 +1,30 @@
+MODEL:
+  TYPE: resnet50
+  NUMBER: 1
+  DROP_PATH_RATE: 0.2
+  NUM_CLASS: 10
+  CHECKPOINT : False
+  RESNET50:
+    LAYER_LIST: [3, 4, 6, 3]
+    NUM_CHANNELS: 3
+
+DATA:
+  TYPE: 'norm_no_RBC'
+  TRAIN_DATA_PATH: 'dataset/norm_no_RBC/*/*/*.jpg'
+  TEST_DATA_PATH: 'dataset/norm_no_RBC/*/*/*.jpg'
+  IMAGE_SIZE: 512
+  BATCH_SIZE: 16
+  OUTPUT_CHANNEL: 10
+  COLOR: 'color'
+  NUM_WORKERS: 2
+
+TRAIN:
+  EPOCHS: 50
+  LR: 1e-4
+  EARLY_STOP: 10
+  LR_STEP: 5
+  LOAD_MODEL_TYPE: 'best'
+
+TSNE:
+  PERPLEXITY_LIST: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+  LIM : 130

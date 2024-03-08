@@ -1,0 +1,16 @@
+【IICを実行するとき】
+originalStart_v8.pyを実行するだけ
+originalStart_v8.pyの内容
+1. IIC_class_v8.py          IICの学習の実行
+    ┗II2_loss.py            IICで使う関数をいろいろ定義
+    ┗II2_transform.py       IICで画像変換する関数を定義
+    ┗modelDefine.py         IICの特徴量抽出モデルを定義
+2. IIC_class_v8_test.py     IICの推論コード
+3. make_result_csv2.py      IICの結果をCSV形式でまとめる
+4. clusterAnalysis1.py      糖尿病患者・非糖尿病患者それぞれから、各クラスタに何枚の糸球体が属しているか
+5. logistic-recall.py       3. で作成した表から、ロジスティック回帰分析を実行する
+
+
+
+
+【分析パート】

@@ -1,0 +1,7 @@
+torchsummary
+yacs
+matplotlib
+timm
+pandas
+sklearn
+einops==0.6.0

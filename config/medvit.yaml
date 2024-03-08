@@ -1,0 +1,27 @@
+MODEL:
+  TYPE: medvit
+  NUMBER: 3
+  DROP_PATH_RATE: 0.2
+  NUM_CLASS: 10
+  MEDVIT:
+    STEM_CHS: [64, 32, 64]
+    DEPTHS: [3, 4, 30, 3]
+    PATH_DROPOUT: 0.2
+
+DATA:
+  TYPE: 'default'
+  TRAIN_DATA_PATH: 'dataset/*/*/*.jpg'
+  TEST_DATA_PATH: 'dataset/*/*/*.jpg'
+  IMAGE_SIZE: 224
+  BATCH_SIZE: 16
+  OUTPUT_CHANNEL: 10
+  COLOR: 'gray'
+  NUM_WORKERS: 1
+
+TRAIN:
+  EPOCHS: 50
+  LR: 1e-3
+  EARLY_STOP: 10
+  LR_STEP: 5
+  LOAD_MODEL_TYPE: 'best'
+  USE_CHECKPOINT : False
