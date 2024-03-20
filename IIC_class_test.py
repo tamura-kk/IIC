@@ -13,11 +13,18 @@ from tqdm import tqdm
 from PIL import Image
 import os
 from models.ModelDefine import NET
-from argparse import ArgumentParser
 import multiprocessing
 import argparse
 import shutil
 import pandas as pd
+
+seed = 123
+
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True
 
 
 # def get_args():
@@ -63,7 +70,7 @@ def resize_img(config):
     elif config.DATA.COLOR == 'colornorm':
         transform = transforms.Compose([
             transforms.Resize(config.DATA.IMAGE_SIZE),  
-            transforms.ToTensor(),  
+            transforms.PILToTensor(),  
             transforms.Normalize(mean=[0.728, 0.514, 0.708],  
                              std=[0.380, 0.446, 0.471])
         ])
@@ -153,8 +160,11 @@ def main(config):
             image = image / 255.0
 
         
-        out = net(image)
+        out, out_over = net(image)
         _, out_id = out.max(1)
+
+        del out_over,_
+
 
         human_id = os.path.basename(os.path.dirname(b_p))
         diabetes = os.path.basename(os.path.dirname(os.path.dirname(b_p)))
@@ -167,7 +177,8 @@ def main(config):
         if torch.max(out) >= 0.99:
             count += 1
             with torch.no_grad():
-                outvec = net.forward_feature(image)
+                outvec, out_over_vec= net.forward_feature(image)
+            del out_over_vec
 
             outvec = outvec.to('cpu').detach().numpy().copy()
 

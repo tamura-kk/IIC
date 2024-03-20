@@ -17,15 +17,18 @@ def NET(config):
                 self.softmax = nn.Softmax(dim=1)
                 
             def forward(self, x):
-                out = self.model(x)
-                out = self.softmax(out)  # クラスタ数の次元を持った確率ベクトル
+                out1, out2= self.model(x)
+                out1 = self.softmax(out1) 
+                out2 = self.softmax(out2) 
 
-                return out
-            
+                return out1, out2
+
+
             def forward_feature(self, x):
-                out = self.model(x)
+                out1, out2 = self.model(x)
 
-                return out
+
+                return out1, out2
             
             
             

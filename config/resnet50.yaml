@@ -1,6 +1,6 @@
 MODEL:
   TYPE: resnet50
-  NUMBER: 1
+  NUMBER: 4
   DROP_PATH_RATE: 0.2
   NUM_CLASS: 10
   CHECKPOINT : False
@@ -9,9 +9,9 @@ MODEL:
     NUM_CHANNELS: 3
 
 DATA:
-  TYPE: 'norm_no_RBC'
-  TRAIN_DATA_PATH: 'dataset/norm_no_RBC/*/*/*.jpg'
-  TEST_DATA_PATH: 'dataset/norm_no_RBC/*/*/*.jpg'
+  TYPE: 'color_norm'
+  TRAIN_DATA_PATH: 'dataset/color_norm/*/*/*.jpg'
+  TEST_DATA_PATH: 'dataset/color_norm/*/*/*.jpg'
   IMAGE_SIZE: 512
   BATCH_SIZE: 16
   OUTPUT_CHANNEL: 10
@@ -21,6 +21,7 @@ DATA:
 TRAIN:
   EPOCHS: 50
   LR: 1e-4
+  OVER_CLUSTERING : True
   EARLY_STOP: 10
   LR_STEP: 5
   LOAD_MODEL_TYPE: 'best'
@@ -28,3 +29,9 @@ TRAIN:
 TSNE:
   PERPLEXITY_LIST: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
   LIM : 130
+
+CAM:
+  METHOD: 'scorecam'
+  DEVICE: 'cuda'
+  IMAGE_PATH: 'dataset\color_norm\diabetes\S06-5511 1\S06-5511 1 1_0_1-12.jpg'
+  OUT_PATH:  'output'

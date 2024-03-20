@@ -77,6 +77,7 @@ _C.TRAIN.EARLY_STOP = 40
 _C.TRAIN.LR_STEP = 5
 _C.TRAIN.LOAD_MODEL_TYPE = 'best'
 _C.TRAIN.USE_CHECKPOINT = False
+_C.TRAIN.OVER_CLUSTERING = False
 
 _C.FUSED_WINDOW_PROCESS = False
 
@@ -87,6 +88,17 @@ _C.FUSED_WINDOW_PROCESS = False
 _C.TSNE = CN()
 _C.TSNE.PERPLEXITY_LIST = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
 _C.TSNE.LIM = 100
+
+# -----------------------------------------------------------------------------
+# CAM settings
+# -----------------------------------------------------------------------------
+
+_C.CAM = CN()
+_C.CAM.DEVICE ='cuda'
+_C.CAM.METHOD = 'scorecam'
+_C.CAM.IMAGE_PATH = None
+_C.CAM.OUT_PATH = None
+
 
 
 

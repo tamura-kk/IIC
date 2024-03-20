@@ -88,7 +88,10 @@ class ResNet(nn.Module):
         self.layer4 = self._make_layer(ResBlock, layer_list[3], planes=512, stride=2)
         
         self.avgpool = nn.AdaptiveAvgPool2d((1,1))
+        
         self.fc = nn.Linear(512*ResBlock.expansion, num_classes)
+
+        self.fc2 = nn.Linear(512*ResBlock.expansion, num_classes*10)
         
     def forward(self, x):
         x = self.relu(self.batch_norm1(self.conv1(x)))
@@ -101,10 +104,11 @@ class ResNet(nn.Module):
         
         x = self.avgpool(x)
         x = x.reshape(x.shape[0], -1)
-        x = self.fc(x)
-        
-        
-        return x
+
+        x1 = self.fc(x)
+        x2 = self.fc2(x)
+
+        return x1, x2
         
     def _make_layer(self, ResBlock, blocks, planes, stride=1):
         ii_downsample = None
